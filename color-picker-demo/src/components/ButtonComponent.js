@@ -9,53 +9,63 @@ class ButtonComponent extends Component{
         this.state={
             compSelected:null,
             compId:null,
-            colorId:1
+            colorId:0
            
           
         }
         
     this.onComponentSelect=this.onComponentSelect.bind(this);
-    
 
         }
 
         onComponentSelect(button) {
-            this.setState({compSelected:button, compId:button.id});  }
-      
+            this.setState({compSelected:button, compId:button.id,
+            colorId:this.state.colorId+1});
+
+           
+          }
+        
+          renderComponents(compId,colorId){
+   
+            let  colores=this.props.colors.filter((color)=>
+                   color.id <= colorId);
+
+                
+                 
+                 const reqColor=colores.map((req)=>{
+                
+                  if(compId==1){
+                    
+                    return(
+      <div>
+      <div>
+      <div className="col-12  col-md-5 m-1">
+          <Card>
+            <CardBody style={{width:"20%",backgroundColor:req.color_id,margin: "35px"}}>
+            <CardTitle>
+              This is color {req.id}
+            </CardTitle>
+            </CardBody>
+          </Card>
+          </div>
+      </div>
+                  </div>
+                    );
+                 
+                }
+                
+                if(compId==2){
+                    return(
+                        <div></div>
+                    );
+                }
+           });
+
+                 }
+         
           
          
-      renderComponents(compId,colorId){
-        const color=this.props.colors.find((color)=>{
-            return(color.id===colorId);
-        });
             
-
-          if(compId==1){
-           
-              return(
-<div>
-<div>
-<div className="col-12  col-md-5 m-1">
-    <Card>
-      <CardBody style={{width:"20%",backgroundColor:'red' ,margin: "35px"}}>
-      <CardTitle>
-        This is color {colorId}
-      </CardTitle>
-      </CardBody>
-    </Card>
-    </div>
-</div>
-            </div>
-              );
-           
-          }
-          
-          if(compId==2){
-              return(
-                  <div></div>
-              );
-          }
-      }
         render(){
     
 const menu=this.props.buttons.map((button)=>{

@@ -29,43 +29,42 @@ class ButtonComponent extends Component{
    
             let  colores=this.props.colors.filter((color)=>
                    color.id <= colorId);
-
-                
-                 
+                   if(compId==1){
                  const reqColor=colores.map((req)=>{
-                
-                  if(compId==1){
+                console.log(req);
+              
                     
                     return(
-      <div>
-      <div>
-      <div className="col-12  col-md-5 m-1">
-          <Card>
-            <CardBody style={{width:"20%",backgroundColor:req.color_id,margin: "35px"}}>
+                        <div  className="col-12  col-md-5 m-1">
+   
+   <Card  style={{backgroundColor:req.color_id, width:"20%",marginTop:"35px",marginLeft:"35px"}}>
+         
             <CardTitle>
               This is color {req.id}
             </CardTitle>
-            </CardBody>
+        
           </Card>
+          
           </div>
+ 
+ );
+      });
+return(
+      <div>
+          {reqColor}
       </div>
-                  </div>
-                    );
-                 
-                }
-                
-                if(compId==2){
+);
+    }
+
+                  if(compId==2){
                     return(
                         <div></div>
                     );
                 }
-           });
+        
 
                  }
-         
-          
-         
-            
+       
         render(){
     
 const menu=this.props.buttons.map((button)=>{

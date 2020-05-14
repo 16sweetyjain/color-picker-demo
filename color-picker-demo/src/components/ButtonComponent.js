@@ -9,7 +9,8 @@ class ButtonComponent extends Component{
         this.state={
             compSelected:null,
             compId:null,
-            colorId:0
+            colorId:0,
+           
            
           
         }
@@ -19,22 +20,24 @@ class ButtonComponent extends Component{
         }
 
         onComponentSelect(button) {
-            this.setState({compSelected:button, compId:button.id,
-            colorId:this.state.colorId+1});
-
+            this.setState({compSelected:button, compId:button.id});
+            if(this.state.compId==1){
+                this.setState({colorId:this.state.colorId+1})
+            }
+    
            
           }
-        
+      
           renderComponents(compId,colorId){
-   
-            let  colores=this.props.colors.filter((color)=>
-                   color.id <= colorId);
+
+
                    if(compId==1){
+                    const  colores=this.props.colors.filter((color)=>
+                    color.id <= colorId);
                  const reqColor=colores.map((req)=>{
-                console.log(req);
-              
-                    
-                    return(
+              //  console.log(req);
+            
+                return(
                         <div  className="col-12  col-md-5 m-1">
    
    <Card  style={{backgroundColor:req.color_id, width:"20%",marginTop:"35px",marginLeft:"35px"}}>
@@ -46,9 +49,11 @@ class ButtonComponent extends Component{
           </Card>
           
           </div>
+                );
+            
  
- );
-      });
+            });
+      
 return(
       <div>
           {reqColor}
@@ -56,14 +61,36 @@ return(
 );
     }
 
-                  if(compId==2){
-                    return(
-                        <div></div>
-                    );
-                }
-        
+    if(compId==2){
+    
+        const  colores=this.props.colors.filter((color)=>
+        color.id !== colorId);
+        const reqColor=colores.map((req)=>{
+            return(
+        <div  className="col-12  col-md-5 m-1">
+   
+        <Card  style={{backgroundColor:req.color_id, width:"20%",marginTop:"35px",marginLeft:"35px"}}>
+              
+                 <CardTitle>
+                   This is color {req.id}
+                 </CardTitle>
+             
+               </Card>
+               
+               </div>
+            );
 
-                 }
+    
+      });
+      return(
+      <div>
+          {reqColor}
+      </div>
+      );
+            }
+        
+        }
+                 
        
         render(){
     

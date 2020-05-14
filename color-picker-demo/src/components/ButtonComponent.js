@@ -7,12 +7,11 @@ class ButtonComponent extends Component{
         super(props);
 
         this.state={
-            compSelected:null,
-            compId:null,
-            colorId:0,
-           
-           
           
+            colorId:0,
+           calorie:null,
+           compId:null
+             
         }
         
     this.onComponentSelect=this.onComponentSelect.bind(this);
@@ -20,77 +19,56 @@ class ButtonComponent extends Component{
         }
 
         onComponentSelect(button) {
-            this.setState({compSelected:button, compId:button.id});
-            if(this.state.compId==1){
-                this.setState({colorId:this.state.colorId+1})
-            }
-    
-           
-          }
-      
-          renderComponents(compId,colorId){
-
-
-                   if(compId==1){
-                    const  colores=this.props.colors.filter((color)=>
-                    color.id <= colorId);
-                 const reqColor=colores.map((req)=>{
-              //  console.log(req);
-            
-                return(
-                        <div  className="col-12  col-md-5 m-1">
-   
-   <Card  style={{backgroundColor:req.color_id, width:"20%",marginTop:"35px",marginLeft:"35px"}}>
+            this.setState({compId:button.id});
          
-            <CardTitle>
-              This is color {req.id}
-            </CardTitle>
-        
-          </Card>
-          
-          </div>
-                );
-            
- 
-            });
-      
-return(
-      <div>
-          {reqColor}
-      </div>
-);
-    }
-
-    if(compId==2){
-    
-        const  colores=this.props.colors.filter((color)=>
-        color.id < colorId);
-        const reqColor=colores.map((req)=>{
-            return(
-        <div  className="col-12  col-md-5 m-1">
-   
-        <Card  style={{backgroundColor:req.color_id, width:"20%",marginTop:"35px",marginLeft:"35px"}}>
-              
-                 <CardTitle>
-                   This is color {req.id}
-                 </CardTitle>
-             
-               </Card>
-               
-               </div>
-            );
-
-    
-      });
-      return(
-      <div>
-          {reqColor}
-      </div>
-      );
+            if(button.id==0){
+                this.setState({colorId: this.state.colorId + 1});
+            } 
+            else{
+                this.setState({colorId:this.state.colorId});
             }
-        
         }
-                 
+        renderComponents() {
+if(this.state.compId==0){
+            const colores = this.props.colors.filter((color)=> color.id <= this.state.colorId);
+            const reqColor = colores.map((req) => {
+               
+                return (<div className="col-12  col-md-5 m-1">
+                    <Card style={{ backgroundColor: req.color_id, width: "20%", marginTop: "35px", marginLeft: "35px" }}>
+                        <CardTitle>
+                            This is color {req.id}
+                        </CardTitle>
+                    </Card>
+                </div>);
+                
+                
+            
+            });
+        
+    
+          return(<div>{reqColor}</div>);
+        } 
+        else{
+
+            const colores = this.props.colors.filter((color)=> (color.id!==this.state.compId)&&(color.id<this.state.colorId));
+            const reqColor = colores.map((req) => {
+                
+                return (<div className="col-12  col-md-5 m-1">
+                    <Card style={{ backgroundColor: req.color_id, width: "20%", marginTop: "35px", marginLeft: "35px" }}>
+                        <CardTitle>
+                            This is color {req.id}
+                        </CardTitle>
+                    </Card>
+                </div>);
+             
+               
+            });
+        
+    
+          return(<div>{reqColor}</div>);
+        }    
+        }
+      
        
         render(){
     
@@ -99,9 +77,11 @@ const menu=this.props.buttons.map((button)=>{
 return(
     <div key ={button.id} className="col-12  col-md-5 m-1">       
  <Card onClick={()=>{this.onComponentSelect(button)}} style={{backgroundColor:'violet',marginTop:"35px",marginLeft:"35px",width:"20%"}}>
-   <CardTitle>
-       {button.name}
-   </CardTitle>
+  {button.id!=0 ?<CardTitle>
+       {button.name} color{button.id}
+   </CardTitle>:<CardTitle>
+       {button.name} color
+   </CardTitle>} 
  </Card> 
 
 </div> 
@@ -117,7 +97,7 @@ return(
         {menu}
     </div>
     <div className="row">
-        {this.renderComponents(this.state.compId,this.state.colorId)};
+        {this.renderComponents()};
     </div>
 </div>
 );

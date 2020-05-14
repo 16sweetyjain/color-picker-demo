@@ -64,7 +64,7 @@ return(
     if(compId==2){
     
         const  colores=this.props.colors.filter((color)=>
-        color.id !== colorId);
+        color.id < colorId);
         const reqColor=colores.map((req)=>{
             return(
         <div  className="col-12  col-md-5 m-1">

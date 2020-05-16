@@ -24,9 +24,9 @@ class App extends Component {
       });
  console.log(this.state.colors);
     }
-    delete=(id)=>{
-let colori =this.state.colors.filter((cal)=>{
-return (cal.id!==id);
+    deleteColor=(id)=>{
+let colori =this.state.colors.filter((color)=>{
+return (color.id!==id);
 
 });
 this.setState({colors:colori});
@@ -36,7 +36,8 @@ this.setState({colors:colori});
   return (
    
  <div>
-   <ButtonComponent  addColor={this.addColor} delete={this.delete} buttons={this.state.buttons}/>
+   <ButtonComponent  addColor={this.addColor} deleteColor={this.delete} buttons={this.state.buttons}/>
+   
 <ShowColor colors={this.state.colors}/>
 
  

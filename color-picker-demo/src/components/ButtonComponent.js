@@ -7,16 +7,12 @@ class ButtonComponent extends Component{
         super(props);
 
         this.state={
-          
-         color_id:null,
-         id:null,
-         visible:null,
+        
          colorId:1
-             
-        }
+     
+        } }
 
 
-        }
 
         onComponentSelect(button) {
       
@@ -26,21 +22,21 @@ class ButtonComponent extends Component{
         else{
             this.setState({colorId:this.state.colorId-1});
         }
-        }
+      }
 
-        renderComponents(button) {
-if(button.id==0&&this.state.colorId<=5){
+      renderComponents(button) {
+    if(button.id==0&&this.state.colorId<=5){
 
 
-  const color=colorCollection.find(calorie=>calorie.id==this.state.colorId);
+    const color=colorCollection.find(calorie=>calorie.id==this.state.colorId);
  
     this.props.addColor(color);
            
       } 
-        else{
+     else{
             if(this.state.colorId>=0&&this.state.colorId<=5){
        const colorie=colorCollection.find(colori=>colori.id==button.id);
-       this.props.delete(colorie.id);
+       this.props.deleteColor(colorie.id);
             }
       
         }    
@@ -57,7 +53,7 @@ return(
   {button.id!=0 ?<CardTitle>
        {button.name} color{button.id}
    </CardTitle>:<CardTitle>
-       {button.name} color
+       {button.name} Color
    </CardTitle>} 
  </Card> 
 

@@ -2,7 +2,6 @@ import React,{ Component } from 'react';
 import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle, Button} from 'reactstrap';
 import ShowColor from './components/ShowColor';
 import ButtonComponent from './components/ButtonComponent';
-
 import Buttons from './shared/buttons';
 
 class App extends Component {
@@ -36,8 +35,8 @@ this.setState({colors:colori});
   return (
    
  <div>
-   <ButtonComponent  addColor={this.addColor} deleteColor={this.delete} buttons={this.state.buttons}/>
-   
+   <ButtonComponent  addColor={this.addColor} deleteColor={this.deleteColor} buttons={this.state.buttons}/>
+
 <ShowColor colors={this.state.colors}/>
 
  

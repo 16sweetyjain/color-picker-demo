@@ -45,17 +45,14 @@ class ButtonComponent extends Component{
        
         render(){
     
-const menu=this.props.buttons.map((button)=>{
+const menu=this.props.buttons.map((buttonEle)=>{
 
 return(
-    <div key ={button.id} className="col-12  col-md-5 m-1">       
- <Card onClick={()=>{this.onComponentSelect(button);this.renderComponents(button)}} style={{backgroundColor:'violet',marginTop:"35px",marginLeft:"35px",width:"20%"}}>
-  {button.id!=0 ?<CardTitle>
-       {button.name} color{button.id}
-   </CardTitle>:<CardTitle>
-       {button.name} Color
-   </CardTitle>} 
- </Card> 
+    <div key ={buttonEle.id} className="col-12  col-md-5 m-1">       
+ <Button onClick={()=>{this.onComponentSelect(buttonEle);this.renderComponents(buttonEle)}} style={{marginTop:"35px",marginLeft:"35px",width:"20%"}}>
+  {buttonEle.id!=0 ?`HIDE color ${buttonEle.id}`:'ADD'}
+   
+ </Button> 
 
 </div> 
 
